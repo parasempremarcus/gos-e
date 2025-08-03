@@ -10,49 +10,41 @@ const gosResults = {
     1: {
         category: "Morte",
         description: "O paciente faleceu em decorrência da lesão cerebral.",
-        details: "Categoria 1 da GOS-E representa o pior resultado possível.",
         outcome: "Desfavorável"
     },
     2: {
         category: "Estado Vegetativo (VS)",
         description: "O paciente está consciente mas não responsivo. Não consegue obedecer comandos simples ou comunicar-se.",
-        details: "O paciente pode abrir os olhos e ter ciclos de sono-vigília, mas não demonstra consciência do ambiente ou capacidade de interação significativa.",
         outcome: "Desfavorável"
     },
     3: {
         category: "Incapacidade Grave Inferior (Lower SD)",
         description: "O paciente está consciente mas requer assistência diária para atividades básicas da vida diária.",
-        details: "Necessita de cuidados constantes e supervisão. Não consegue ficar sozinho por períodos prolongados. Requer assistência para higiene pessoal, alimentação e atividades domésticas básicas.",
         outcome: "Desfavorável"
     },
     4: {
         category: "Incapacidade Grave Superior (Upper SD)",
         description: "O paciente pode ficar sozinho em casa por períodos limitados, mas ainda necessita assistência significativa.",
-        details: "Pode cuidar de si mesmo por até 8 horas durante o dia, mas precisa de supervisão e assistência para atividades mais complexas. Não consegue sair de casa independentemente.",
         outcome: "Desfavorável"
     },
     5: {
         category: "Incapacidade Moderada Inferior (Lower MD)",
         description: "O paciente é independente em casa mas tem limitações significativas fora de casa e no trabalho.",
-        details: "Consegue cuidar de si mesmo em casa, mas tem dificuldades para trabalhar, viajar independentemente ou participar de atividades sociais. Pode ter problemas comportamentais ou cognitivos que afetam relacionamentos.",
         outcome: "Favorável"
     },
     6: {
         category: "Incapacidade Moderada Superior (Upper MD)",
         description: "O paciente é independente fora de casa mas tem capacidade de trabalho reduzida ou problemas sociais moderados.",
-        details: "Pode viajar e fazer compras independentemente, mas tem limitações no trabalho ou nas atividades sociais. Pode trabalhar com capacidade reduzida ou ter problemas ocasionais nos relacionamentos.",
         outcome: "Favorável"
     },
     7: {
         category: "Boa Recuperação Inferior (Lower GR)",
         description: "O paciente retomou a maioria das atividades normais, mas ainda tem alguns problemas menores relacionados à lesão.",
-        details: "Trabalha com capacidade normal ou quase normal, participa de atividades sociais, mas pode ter sintomas residuais como dores de cabeça ocasionais, problemas leves de memória ou mudanças mínimas de personalidade.",
         outcome: "Favorável"
     },
     8: {
         category: "Boa Recuperação Superior (Upper GR)",
         description: "O paciente teve recuperação completa ou quase completa, retornando ao nível de funcionamento anterior à lesão.",
-        details: "Não há problemas significativos relacionados à lesão que afetem a vida diária. O paciente retomou todas as atividades de trabalho, sociais e familiares no mesmo nível anterior à lesão.",
         outcome: "Favorável"
     }
 };
@@ -64,15 +56,16 @@ function startAssessment() {
     updateProgress();
 }
 
-function showQuestion(questionId) {
+function showQuestion(questionId, isBack = false) {
     // Esconder todas as perguntas
+    document.getElementById('result').classList.remove('show');
     const questions = document.querySelectorAll('.question-container');
     questions.forEach(q => {
         q.classList.remove('active');
     });
 
-    // Registrar histórico, exceto na primeira chamada
-    if (currentQuestion && currentQuestion !== questionId) {
+    // Registrar histórico só se não for navegação para trás
+    if (currentQuestion && currentQuestion !== questionId && !isBack) {
         questionHistory.push(currentQuestion);
     }
 
@@ -87,7 +80,7 @@ function showQuestion(questionId) {
 function goBackQuestion() {
     if (questionHistory.length > 0) {
         const previousQuestion = questionHistory.pop();
-        showQuestion(previousQuestion);
+        showQuestion(previousQuestion, true); // Indica que está voltando
         answeredQuestions = Math.max(0, answeredQuestions - 1);
         updateProgress();
     }
@@ -240,12 +233,14 @@ function showResult(score) {
     document.getElementById('resultScore').textContent = `GOS-E: ${score}`;
     document.getElementById('resultCategory').textContent = result.category;
     document.getElementById('resultDescription').textContent = result.description;
-    document.getElementById('resultDetails').innerHTML = `
-        <strong>Detalhes:</strong><br>
-        ${result.details}<br><br>
-        <strong>Classificação:</strong> ${result.outcome}<br>
-    `;
+    document.getElementById('resultDetails').innerHTML = `<strong>Classificação</strong>: ${result.outcome}`;
     
+    if (currentQuestion !== 'result') {
+        questionHistory.push(currentQuestion);
+    }
+
+    currentQuestion = 'result';
+
     document.getElementById('result').classList.add('show');
     
     // Completar barra de progresso

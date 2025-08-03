@@ -18,7 +18,7 @@
         <div class="content">
             <!-- Tela de Introdução -->
             <div id="intro" class="intro">
-                <h2>Bem-vindo, LANCer!</h2>
+                <h2>Bem-vindo(a), LANCer!</h2>
                 <p>Esta escala avalia o desfecho funcional após lesão cerebral traumática.</p>
                 <p>Lembre-se de enfatizar que <span class="destaque">as incapacidades são em relação ao TCE</span>, e não outras lesões.</p>
                 <p>Preste atenção ao DDD do número, a maioria dos pacientes não são de Salvador.</p>
@@ -35,14 +35,14 @@
             <div id="q1" class="question-container">
                 <div class="question">
                     <h2>Pergunta 1: Consciência</h2>
-                    <p>A pessoa com lesão cerebral é capaz de obedecer comandos simples ou dizer qualquer palavra?</p>
+                    <p>A pessoa é capaz de obedecer comandos simples ou dizer qualquer palavra?</p>
                     <div class="question-note">
                         <strong>Nota:</strong> Qualquer pessoa que demonstre capacidade de obedecer comandos simples, pronunciar qualquer palavra ou se comunicar especificamente de qualquer outra forma não é mais considerada em estado vegetativo. Movimentos oculares não são evidência confiável de responsividade significativa.
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="btn btn-no" onclick="q1_no()">Não</button>
                     <button class="btn btn-yes" onclick="q1_yes()">Sim</button>
+                    <button class="btn btn-no" onclick="q1_no()">Não</button>
                 </div>
             </div>
 
@@ -56,9 +56,9 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
-                    <button class="btn btn-no" onclick="q2a_no()">Não</button>
                     <button class="btn btn-yes" onclick="q2a_yes()">Sim</button>
+                    <button class="btn btn-no" onclick="q2a_no()">Não</button>
+                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
                 </div>
             </div>
 
@@ -72,9 +72,9 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
-                    <button class="btn btn-no" onclick="q2b_no()">Não</button>
                     <button class="btn btn-yes" onclick="q2b_yes()">Sim</button>
+                    <button class="btn btn-no" onclick="q2b_no()">Não</button>
+                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
                 </div>
             </div>
 
@@ -88,9 +88,9 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
-                    <button class="btn btn-no" onclick="q3a_no()">Não</button>
                     <button class="btn btn-yes" onclick="q3a_yes()">Sim</button>
+                    <button class="btn btn-no" onclick="q3a_no()">Não</button>
+                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
                 </div>
             </div>
 
@@ -104,9 +104,9 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
-                    <button class="btn btn-no" onclick="q4a_no()">Não</button>
                     <button class="btn btn-yes" onclick="q4a_yes()">Sim</button>
+                    <button class="btn btn-no" onclick="q4a_no()">Não</button>
+                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
                 </div>
             </div>
 
@@ -120,9 +120,9 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
-                    <button class="btn btn-no" onclick="q5a_no()">Não</button>
                     <button class="btn btn-yes" onclick="q5a_yes()">Sim</button>
+                    <button class="btn btn-no" onclick="q5a_no()">Não</button>
+                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
                 </div>
             </div>
 
@@ -133,7 +133,6 @@
                     <p>Qual é o nível de restrição no trabalho ou nos estudos?</p>
                 </div>
                 <div class="buttons">
-                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
                     <button class="btn btn-option" onclick="q5b_reduced()">Capacidade de trabalho ou estudo reduzida</button>
                     <button class="btn btn-option" onclick="q5b_sheltered()">Capaz de trabalhar ou estudar apenas em ambiente protegido ou é atualmente incapaz</button>
                 </div>
@@ -149,9 +148,9 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
-                    <button class="btn btn-no" onclick="q6a_no()">Não</button>
                     <button class="btn btn-yes" onclick="q6a_yes()">Sim</button>
+                    <button class="btn btn-no" onclick="q6a_no()">Não</button>
+                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
                 </div>
             </div>
 
@@ -178,9 +177,9 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
-                    <button class="btn btn-no" onclick="q7a_no()">Não</button>
                     <button class="btn btn-yes" onclick="q7a_yes()">Sim</button>
+                    <button class="btn btn-no" onclick="q7a_no()">Não</button>
+                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
                 </div>
             </div>
 
@@ -191,9 +190,9 @@
                     <p>Qual foi a extensão da perturbação ou tensão?</p>
                 </div>
                 <div class="buttons">
-                    <button class="btn btn-option" onclick="q7b_occasional()">Ocasional - menos que semanal</button>
-                    <button class="btn btn-option" onclick="q7b_frequent()">Frequente ou constante - uma vez por semana ou mais, mas tolerável</button>
-                    <button class="btn btn-option" onclick="q7b_constant()">Constante - diário e intolerável</button>
+                    <button class="btn btn-option" onclick="q7b_occasional()">Ocasional: menos que semanal</button>
+                    <button class="btn btn-option" onclick="q7b_frequent()">Frequente ou constante: uma vez por semana ou mais, mas tolerável</button>
+                    <button class="btn btn-option" onclick="q7b_constant()">Constante: diário e intolerável</button>
                 </div>
             </div>
 
@@ -207,9 +206,9 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
-                    <button class="btn btn-no" onclick="q8a_no()">Não</button>
                     <button class="btn btn-yes" onclick="q8a_yes()">Sim</button>
+                    <button class="btn btn-no" onclick="q8a_no()">Não</button>
+                    <button class="btn btn-back" onclick="goBackQuestion()">Voltar</button>
                 </div>
             </div>
 
@@ -219,9 +218,10 @@
                 <h3 id="resultCategory"></h3>
                 <p id="resultDescription"></p>
                 <div class="result-details">
-                    <p id="resultDetails"></p>
+                    <div id="resultDetails"></div>
                 </div>
                 <button class="restart-btn" onclick="restartAssessment()">Reiniciar</button>
+                <button class="btn-back-results" onclick="goBackQuestion()">Voltar</button>
             </div>
         </div>
     </div>

@@ -178,11 +178,17 @@ body {
 }
 
 .result-details {
+    font-size: 1.1em;
     background: rgba(255,255,255,0.1);
-    padding: 20px;
     border-radius: 8px;
-    margin-top: 20px;
-    text-align: left;
+    margin-top: 0px;
+    margin: 20px auto 0 auto;
+    max-width: 500px;
+    min-height: 40px;
+    text-align: center;
+    padding: 14px 18px;
+    display: grid;
+    place-items: center;
 }
 
 .progress-bar {
@@ -276,11 +282,31 @@ body {
 
 .btn-back {
     background: #f1c40f;
-    color: #333;
+    color: white;
     margin-right: 3px;
 }
 .btn-back:hover {
     background: #d4ac0d;
+}
+
+.btn-back-results {
+    margin-left: 10px;
+    background: #f1c40f;
+    color: white;
+    padding: 12.2px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    font-family: "Lusitana";
+}
+.btn-back-results:hover {
+    background: #d4ac0d;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .destaque {
