@@ -3,6 +3,7 @@
 let currentQuestion = 'intro';
 let totalQuestions = 8;
 let answeredQuestions = 0;
+let questionHistory = [];
 
 // Definições dos resultados GOS-E
 const gosResults = {
@@ -69,12 +70,26 @@ function showQuestion(questionId) {
     questions.forEach(q => {
         q.classList.remove('active');
     });
-    
+
+    // Registrar histórico, exceto na primeira chamada
+    if (currentQuestion && currentQuestion !== questionId) {
+        questionHistory.push(currentQuestion);
+    }
+
     // Mostrar a pergunta atual
     const currentQ = document.getElementById(questionId);
     if (currentQ) {
         currentQ.classList.add('active');
         currentQuestion = questionId;
+    }
+}
+
+function goBackQuestion() {
+    if (questionHistory.length > 0) {
+        const previousQuestion = questionHistory.pop();
+        showQuestion(previousQuestion);
+        answeredQuestions = Math.max(0, answeredQuestions - 1);
+        updateProgress();
     }
 }
 
@@ -108,74 +123,38 @@ function q1_yes() {
 
 // Q2a: Independência em casa - assistência essencial
 function q2a_yes() {
-    nextQuestion('q2c_dependent');
+    nextQuestion('q2b');
 }
 
 function q2a_no() {
-    nextQuestion('q2b');
+    nextQuestion('q3a');
 }
 
 // Q2b: Precisa de ajuda frequente
 function q2b_yes() {
-    nextQuestion('q2c_help');
-}
-
-function q2b_no() {
-    nextQuestion('q3a');
-}
-
-// Q2c: Era independente antes da lesão (para dependentes)
-function q2c_dependent_no() {
     setResult(3); // Lower SD
 }
 
-function q2c_dependent_yes() {
-    nextQuestion('q3a');
-}
-
-// Q2c: Era independente antes da lesão (para quem precisa de ajuda)
-function q2c_help_no() {
+function q2b_no() {
     setResult(4); // Upper SD
-}
-
-function q2c_help_yes() {
-    nextQuestion('q3a');
 }
 
 // Q3a: Consegue fazer compras
 function q3a_no() {
-    nextQuestion('q3b');
+    setResult(4); // Upper SD
 }
 
 function q3a_yes() {
     nextQuestion('q4a');
 }
 
-// Q3b: Conseguia fazer compras antes da lesão
-function q3b_no() {
-    nextQuestion('q4a');
-}
-
-function q3b_yes() {
-    setResult(4); // Upper SD
-}
-
 // Q4a: Consegue viajar localmente
 function q4a_no() {
-    nextQuestion('q4b');
+    setResult(4); // Upper SD
 }
 
 function q4a_yes() {
     nextQuestion('q5a');
-}
-
-// Q4b: Conseguia viajar antes da lesão
-function q4b_no() {
-    nextQuestion('q5a');
-}
-
-function q4b_yes() {
-    setResult(4); // Upper SD
 }
 
 // Q5a: Consegue trabalhar com capacidade anterior
@@ -184,42 +163,15 @@ function q5a_no() {
 }
 
 function q5a_yes() {
-    nextQuestion('q5c_working');
+    nextQuestion('q6a');
 }
 
 // Q5b: Nível de restrição no trabalho
 function q5b_reduced() {
-    nextQuestion('q5c_reduced');
-}
-
-function q5b_sheltered() {
-    nextQuestion('q5c_sheltered');
-}
-
-// Q5c: Trabalhava antes da lesão (capacidade normal)
-function q5c_working_no() {
-    nextQuestion('q6a');
-}
-
-function q5c_working_yes() {
-    nextQuestion('q6a');
-}
-
-// Q5c: Trabalhava antes da lesão (capacidade reduzida)
-function q5c_reduced_no() {
-    nextQuestion('q6a');
-}
-
-function q5c_reduced_yes() {
     setResult(6); // Upper MD
 }
 
-// Q5c: Trabalhava antes da lesão (trabalho protegido)
-function q5c_sheltered_no() {
-    nextQuestion('q6a');
-}
-
-function q5c_sheltered_yes() {
+function q5b_sheltered() {
     setResult(5); // Lower MD
 }
 
@@ -229,61 +181,25 @@ function q6a_no() {
 }
 
 function q6a_yes() {
-    nextQuestion('q6c');
+    nextQuestion('q7a');
 }
 
 // Q6b: Extensão da restrição nas atividades
 function q6b_bit_less() {
-    nextQuestion('q6c_bit_less');
-}
-
-function q6b_much_less() {
-    nextQuestion('q6c_much_less');
-}
-
-function q6b_unable() {
-    nextQuestion('q6c_unable');
-}
-
-// Q6c: Participava de atividades antes da lesão (sem restrição)
-function q6c_no() {
-    nextQuestion('q7a');
-}
-
-function q6c_yes() {
-    nextQuestion('q7a');
-}
-
-// Q6c: Participava de atividades antes da lesão (um pouco menos)
-function q6c_bit_less_no() {
-    nextQuestion('q7a');
-}
-
-function q6c_bit_less_yes() {
     setResult(7); // Lower GR
 }
 
-// Q6c: Participava de atividades antes da lesão (muito menos)
-function q6c_much_less_no() {
-    nextQuestion('q7a');
-}
-
-function q6c_much_less_yes() {
+function q6b_much_less() {
     setResult(6); // Upper MD
 }
 
-// Q6c: Participava de atividades antes da lesão (incapaz)
-function q6c_unable_no() {
-    nextQuestion('q7a');
-}
-
-function q6c_unable_yes() {
+function q6b_unable() {
     setResult(5); // Lower MD
 }
 
 // Q7a: Problemas psicológicos que afetam relacionamentos
 function q7a_no() {
-    nextQuestion('q7c');
+    nextQuestion('q8a');
 }
 
 function q7a_yes() {
@@ -292,78 +208,24 @@ function q7a_yes() {
 
 // Q7b: Extensão da perturbação
 function q7b_occasional() {
-    nextQuestion('q7c_occasional');
-}
-
-function q7b_frequent() {
-    nextQuestion('q7c_frequent');
-}
-
-function q7b_constant() {
-    nextQuestion('q7c_constant');
-}
-
-// Q7c: Havia problemas antes da lesão (sem problemas psicológicos)
-function q7c_no() {
-    nextQuestion('q8a');
-}
-
-function q7c_yes() {
-    nextQuestion('q8a');
-}
-
-// Q7c: Havia problemas antes da lesão (ocasional)
-function q7c_occasional_no() {
     setResult(7); // Lower GR
 }
 
-function q7c_occasional_yes() {
-    nextQuestion('q8a');
-}
-
-// Q7c: Havia problemas antes da lesão (frequente)
-function q7c_frequent_no() {
+function q7b_frequent() {
     setResult(6); // Upper MD
 }
 
-function q7c_frequent_yes() {
-    nextQuestion('q8a');
-}
-
-// Q7c: Havia problemas antes da lesão (constante)
-function q7c_constant_no() {
+function q7b_constant() {
     setResult(5); // Lower MD
-}
-
-function q7c_constant_yes() {
-    nextQuestion('q8a');
 }
 
 // Q8a: Outros problemas relacionados à lesão
 function q8a_no() {
-    nextQuestion('q8b_no');
+    setResult(8); // Upper GR
 }
 
 function q8a_yes() {
-    nextQuestion('q8b_yes');
-}
-
-// Q8b: Problemas similares antes da lesão (sem outros problemas)
-function q8b_no_no() {
-    setResult(8); // Upper GR
-}
-
-function q8b_no_yes() {
-    setResult(8); // Upper GR
-}
-
-// Q8b: Problemas similares antes da lesão (com outros problemas)
-function q8b_yes_no() {
     setResult(7); // Lower GR
-}
-
-function q8b_yes_yes() {
-    setResult(8); // Upper GR
 }
 
 function showResult(score) {
@@ -396,6 +258,7 @@ function updateProgress() {
 }
 
 function restartAssessment() {
+    
     // Reset variables
     currentQuestion = 'intro';
     answeredQuestions = 0;
